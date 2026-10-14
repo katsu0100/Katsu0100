@@ -1,174 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>教員の仕事効率化ハブ</title>
+<meta name="theme-color" content="#17324d">
+<title>先生の仕事効率化ハブ</title>
 <style>
-:root{--ink:#1f2937;--muted:#64748b;--line:#dbe3ec;--bg:#f4f7fb;--navy:#17324d;--blue:#2563eb;--teal:#0f766e;--gold:#d97706;--rose:#be123c;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
-header{background:linear-gradient(120deg,#17324d,#245a72);color:white;padding:28px max(20px,calc((100% - 1180px)/2))}
-header h1{margin:0;font-size:clamp(1.45rem,3vw,2.1rem)}header p{margin:8px 0 0;color:#e3edf5}
-.wrap{max-width:1180px;margin:22px auto;padding:0 16px}.notice{background:#fff7ed;border:1px solid #fed7aa;padding:12px 15px;border-radius:12px;font-size:.92rem;margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 3px 12px #0f172a08}.span8{grid-column:span 8}.span7{grid-column:span 7}.span6{grid-column:span 6}.span5{grid-column:span 5}.span4{grid-column:span 4}.span12{grid-column:span 12}
-h2{font-size:1.18rem;margin:0 0 12px;color:var(--navy)}h3{font-size:1rem;margin:14px 0 8px}label{display:block;font-weight:650;font-size:.9rem;margin:10px 0 5px}
-input,select,textarea{width:100%;min-height:46px;border:1px solid #cbd5e1;border-radius:10px;padding:11px 12px;font:inherit;font-size:16px;background:white;color:var(--ink)}textarea{min-height:88px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-button{border:0;border-radius:10px;min-height:44px;padding:11px 14px;font:inherit;font-weight:700;cursor:pointer;background:var(--blue);color:white}button.secondary{background:#e8eef5;color:#24364b}button.green{background:var(--teal)}button.orange{background:var(--gold)}button.red{background:var(--rose)}
-.small{font-size:.84rem;color:var(--muted)}.result{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px;min-height:70px;white-space:pre-wrap;margin-top:12px}
-.metric{display:flex;gap:12px;flex-wrap:wrap}.metric div{background:#eff6ff;border-radius:10px;padding:10px 14px;min-width:110px}.metric strong{display:block;font-size:1.4rem;color:var(--blue)}
-.tasklist{display:flex;flex-direction:column;gap:8px}.task{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px}.task.done .tasktext{text-decoration:line-through;color:#94a3b8}.tasktext small{display:block;color:var(--muted)}.task button{padding:5px 8px;font-size:.8rem}
-.pill{display:inline-block;border-radius:999px;background:#e0f2fe;color:#075985;padding:2px 8px;font-size:.78rem;font-weight:700}.idea{border-left:4px solid var(--teal);padding:9px 12px;background:#f0fdfa;border-radius:0 9px 9px 0;margin:8px 0}
-footer{max-width:1180px;margin:20px auto;padding:0 16px 28px;color:var(--muted);font-size:.82rem}
-@media(max-width:800px){header{padding:22px 16px;padding-top:calc(18px + env(safe-area-inset-top))}.wrap{padding:12px 10px calc(24px + env(safe-area-inset-bottom))}.span8,.span7,.span6,.span5,.span4{grid-column:span 12}.row{grid-template-columns:1fr}.card{padding:15px}.btns{gap:8px}button{flex:0 0 auto}.task{grid-template-columns:28px 1fr auto}}
-@media print{header{background:#17324d!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.btns,button{display:none}.card{break-inside:avoid;box-shadow:none}.wrap{max-width:none}.result{white-space:pre-wrap}}
+:root{--navy:#17324d;--blue:#2e6f95;--teal:#2b7a78;--paper:#f4f7fa;--ink:#1e293b;--muted:#64748b;--line:#dbe4ec;--white:#fff;--gold:#f2b84b;--red:#a43a3a}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,var(--navy),#245b75);color:#fff;padding:24px max(18px,calc((100% - 1100px)/2));padding-top:calc(22px + env(safe-area-inset-top))}
+header h1{font-size:clamp(23px,4vw,32px);margin:0 0 5px} header p{margin:0;color:#dbeafe;font-size:14px}
+main{max-width:1100px;margin:0 auto;padding:16px 14px 40px}
+.notice{background:#fff8e7;border:1px solid #f1d89a;border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:15px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.tab{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:12px;padding:13px 8px;font-weight:700;font-size:15px;min-height:52px}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{display:none}.panel.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 3px 12px #17324d08}
+h2{font-size:21px;color:var(--navy);margin:0 0 5px} .sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+h3{font-size:16px;margin:0 0 10px;color:var(--navy)}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px;color:#334155}
+input,select,textarea{font:inherit;width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);min-height:44px}
+textarea{min-height:90px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+button{font:inherit;cursor:pointer}
+.btn{border:0;border-radius:10px;padding:11px 15px;min-height:44px;font-weight:700;background:var(--navy);color:#fff}
+.btn.secondary{background:#e8eff5;color:var(--navy);border:1px solid #d1dce6}
+.btn.teal{background:var(--teal)} .btn.danger{background:#fff0f0;color:var(--red);border:1px solid #f0caca}
+.list{display:flex;flex-direction:column;gap:8px}
+.task{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.task input[type=checkbox]{width:22px;height:22px;min-height:22px;margin-top:3px;accent-color:var(--teal)}
+.task.done .tasktitle{text-decoration:line-through;color:#94a3b8}
+.tasktitle{font-weight:700;overflow-wrap:anywhere}.meta{font-size:12px;color:var(--muted);margin-top:4px}
+.pill{display:inline-block;border-radius:999px;background:#eaf2f8;color:#25516c;padding:3px 8px;font-size:11px;font-weight:700;margin-right:4px}
+.pill.high{background:#fff0df;color:#8a4b00}.pill.overdue{background:#ffe5e5;color:#9f2424}
+.output{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:100px}
+.small{font-size:12px;color:var(--muted)}
+.empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed #cbd5e1;border-radius:12px}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+footer{text-align:center;font-size:12px;color:var(--muted);padding:18px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.card{padding:15px}.tabs{gap:5px}.tab{font-size:13px;padding:10px 4px}header{padding-left:16px;padding-right:16px}}
 </style>
 </head>
 <body>
-<header style="padding-top:calc(24px + env(safe-area-inset-top))">
-<h1>教員の仕事効率化ハブ</h1>
-<p>iPad版｜授業・文章・校務を一か所で整理</p>
+<header>
+  <h1>先生の仕事効率化ハブ</h1>
+  <p>タスク管理・授業づくり・保護者向け文章を、ひとつの場所に。</p>
 </header>
-<div class="wrap">
-<div class="notice"><strong>最初に：</strong>このファイルはiPadのSafariなどで使える試作版です。入力した内容は基本的にこの端末のブラウザ内だけで扱い、AIサービスへ自動送信しません。児童名・成績・健康情報などの個人情報は入力しないでください。学校の情報セキュリティ規定を優先してください。</div>
-<div class="grid">
-<section class="card span8">
-<h2>1｜今日の仕事を整理する</h2>
-<div class="row"><div><label for="taskName">やること</label><input id="taskName" placeholder="例：学年だよりの確認"></div><div><label for="taskDue">期限</label><input id="taskDue" type="date"></div></div>
-<div class="row"><div><label for="taskPriority">優先度</label><select id="taskPriority"><option value="高">高：期限が近い・影響大</option><option value="中" selected>中：今週中に進める</option><option value="低">低：余裕がある</option></select></div><div><label for="taskMins">見積もり時間（分）</label><input id="taskMins" type="number" min="5" step="5" value="15"></div></div>
-<div class="btns"><button onclick="addTask()">仕事を追加</button><button class="secondary" onclick="clearDone()">完了した仕事を削除</button><button class="secondary" onclick="exportTasks()">仕事一覧をCSV保存</button></div>
-<div class="metric" style="margin:14px 0"><div><span class="small">残りの仕事</span><strong id="remaining">0</strong></div><div><span class="small">見積もり合計</span><strong id="totalMins">0分</strong></div><div><span class="small">完了</span><strong id="completed">0</strong></div></div>
-<div id="taskList" class="tasklist"></div>
-<p class="small">コツ：タスクを「10〜20分で終わる次の一手」に分けると、着手しやすくなります。</p>
-</section>
-<section class="card span4">
-<h2>2｜校務を減らす視点</h2>
-<div class="idea"><strong>やめる</strong><br>目的が曖昧な二重入力・慣例だけの作業は、必要性を確認する。</div>
-<div class="idea"><strong>まとめる</strong><br>同じ種類のメール返信・印刷・確認は時間を決めてまとめる。</div>
-<div class="idea"><strong>型にする</strong><br>毎年使う文書、行事案内、授業の振り返りはひな形化する。</div>
-<div class="idea"><strong>任せる・共有する</strong><br>校内ルールの範囲で、役割分担と共有フォルダを整える。</div>
-<p class="small">※学校や教育委員会の決まりを変える必要があることは、個人判断で省略せず管理職等に確認。</p>
-</section>
-<section class="card span6">
-<h2>3｜授業準備のたたき台</h2>
-<label for="subject">教科・単元</label><input id="subject" placeholder="例：国語「資料を使って考えを伝えよう」">
-<div class="row"><div><label for="lessonTime">授業時間</label><select id="lessonTime"><option>45分</option><option>50分</option><option>その他</option></select></div><div><label for="lessonType">重視したいこと</label><select id="lessonType"><option>考えを比較して深める</option><option>基礎を定着させる</option><option>対話・協働</option><option>自分で課題を解決する</option><option>振り返り・評価</option></select></div></div>
-<label for="lessonGoal">本時の目標（分かる範囲で）</label><textarea id="lessonGoal" placeholder="例：資料の特徴を比べ、根拠を示して自分の考えを説明する"></textarea>
-<label for="lessonConcern">子どもがつまずきそうな点</label><input id="lessonConcern" placeholder="例：感想だけになり、資料を根拠にできない">
-<div class="btns"><button onclick="makeLesson()">授業案を組み立てる</button><button class="secondary" onclick="copyResult('lessonResult')">コピー</button></div>
-<div id="lessonResult" class="result">入力すると、授業案のたたき台がここに表示されます。</div>
-<p class="small">生成されるのは検討用のひな形です。教材・学年・実態に合わせて調整してください。</p>
-</section>
-<section class="card span6">
-<h2>4｜文章作成の下書き</h2>
-<label for="docType">作りたい文章</label><select id="docType"><option>保護者向け学級通信</option><option>校内・外部向けメール</option><option>行事の案内文</option><option>所見の下書き（匿名・事実ベース）</option><option>会議メモの整理</option></select>
-<label for="docFacts">伝えたい事実・要点</label><textarea id="docFacts" placeholder="箇条書きで入力。児童名など個人情報は入れない"></textarea>
-<div class="row"><div><label for="docTone">文体</label><select id="docTone"><option>簡潔で丁寧</option><option>温かく前向き</option><option>公的でかため</option><option>子どもに伝わる言葉</option></select></div><div><label for="docLength">長さ</label><select id="docLength"><option>短め</option><option>標準</option><option>詳しめ</option></select></div></div>
-<div class="btns"><button onclick="makeDraft()">下書きの型を作る</button><button class="secondary" onclick="copyResult('draftResult')">コピー</button></div>
-<div id="draftResult" class="result">要点を入力すると、文章の構成案が表示されます。</div>
-<p class="small">このオフライン版は完成文を自動生成するAIではなく、整理用の構成案を作ります。完成文は必要に応じてAIや自分で仕上げてください。</p>
-</section>
-<section class="card span7">
-<h2>5｜会議・打ち合わせを短くするメモ</h2>
-<label for="meetingTopic">議題</label><input id="meetingTopic" placeholder="例：修学旅行の自由行動ルート">
-<div class="row"><div><label for="meetingDecision">決まったこと</label><textarea id="meetingDecision" placeholder="決定事項を箇条書き"></textarea></div><div><label for="meetingAction">次にすること（担当・期限）</label><textarea id="meetingAction" placeholder="担当者／行動／期限"></textarea></div></div>
-<div class="btns"><button onclick="makeMinutes()">議事メモを整える</button><button class="secondary" onclick="copyResult('minutesResult')">コピー</button></div>
-<div id="minutesResult" class="result">入力内容を整理して表示します。</div>
-</section>
-<section class="card span5">
-<h2>6｜明日の自分への引き継ぎ</h2>
-<label for="tomorrow">明日、最初にやること</label><textarea id="tomorrow" placeholder="例：朝、印刷物を確認してから学年会へ"></textarea>
-<label for="waiting">返事待ち・確認待ち</label><textarea id="waiting" placeholder="例：旅行会社からの行程確認"></textarea>
-<label for="memo">忘れたくないメモ</label><textarea id="memo" placeholder="個人情報を含めない"></textarea>
-<div class="btns"><button class="green" onclick="makeHandover()">引き継ぎメモを作る</button><button class="secondary" onclick="copyResult('handoverResult')">コピー</button></div>
-<div id="handoverResult" class="result">退勤前の1分で、翌朝の再始動をスムーズに。</div>
-</section>
-<section class="card span12">
-<h2>7｜次に作り込むと効果が大きいもの</h2>
-<div class="row">
-<div><strong>週案・行事予定の連動</strong><p class="small">締切や行事から、準備タスクを自動で洗い出す。</p></div>
-<div><strong>学級通信・保護者文書のテンプレート集</strong><p class="small">よく使う場面ごとに、校内の表現に合わせて蓄積する。</p></div>
-<div><strong>ワークシート・評価規準のひな形</strong><p class="small">目標、活動、評価の観点を一緒に確認する。</p></div>
-<div><strong>校務の「やめる・減らす」提案表</strong><p class="small">作業時間・頻度・目的を見える化し、改善案を相談する。</p></div>
-</div>
-<div class="btns"><button class="secondary" onclick="window.print()">この画面を印刷</button><button class="secondary" onclick="downloadData()">タスクとメモをJSON保存</button><button class="red" onclick="resetAll()">このブラウザ内の入力を消去</button></div>
-</section>
-</div>
-</div>
-<footer>iPad向け試作版 v1.1｜Safariで開き、共有メニューから「ホーム画面に追加」するとアプリのように起動できます。タスクはこのブラウザのローカル保存を使用します。共有端末では個人情報を入力せず、使用後に必要に応じて消去してください。文章・授業案は必ず教員が内容を確認してください。</footer>
+<main>
+  <div class="notice"><strong>個人情報に注意：</strong>このツールの入力内容は、基本的にこのブラウザ内に保存されます。児童の氏名・成績・家庭状況など、個人情報や機微な内容は入力しないでください。文章生成は入力内容を組み合わせる補助機能で、AIによる自動判断ではありません。</div>
+  <nav class="tabs" aria-label="機能">
+    <button class="tab active" data-tab="tasks">① タスク管理</button>
+    <button class="tab" data-tab="lesson">② 授業づくり</button>
+    <button class="tab" data-tab="writing">③ 文章作成</button>
+  </nav>
+
+  <section id="tasks" class="panel active">
+    <div class="card">
+      <h2>今日の仕事を整理する</h2><p class="sub">期限・優先度・所要時間を見える化。完了チェックも保存されます。</p>
+      <div class="grid">
+        <div><label for="taskTitle">やること *</label><input id="taskTitle" placeholder="例：学級通信の原稿を仕上げる"></div>
+        <div><label for="taskDue">期限</label><input id="taskDue" type="date"></div>
+        <div><label for="taskPriority">優先度</label><select id="taskPriority"><option value="高">高</option><option value="中" selected>中</option><option value="低">低</option></select></div>
+        <div><label for="taskMinutes">見積もり時間（分）</label><input id="taskMinutes" type="number" min="0" step="5" value="15"></div>
+        <div><label for="taskCategory">分類</label><select id="taskCategory"><option>授業</option><option>学級経営</option><option>保護者対応</option><option>校務分掌</option><option>行事</option><option>その他</option></select></div>
+        <div><label for="taskNote">メモ（個人情報は入力しない）</label><input id="taskNote" placeholder="次にする具体的な一歩"></div>
+      </div>
+      <div class="btnrow"><button class="btn" id="addTask">タスクを追加</button><button class="btn secondary" id="clearDone">完了済みを削除</button></div>
+    </div>
+    <div class="card">
+      <div class="grid">
+        <div><h3>タスクリスト</h3><p class="sub" id="taskSummary">登録した仕事がここに表示されます。</p></div>
+        <div><label for="taskFilter">表示するタスク</label><select id="taskFilter"><option value="all">すべて</option><option value="open">未完了のみ</option><option value="done">完了のみ</option></select></div>
+      </div>
+      <div class="btnrow" style="margin-top:0;margin-bottom:12px"><button class="btn secondary" id="exportTasks">タスクをCSV保存</button><button class="btn secondary" id="backupData">全データをバックアップ</button><button class="btn secondary" id="importDataBtn">バックアップを読み込む</button><input id="importData" type="file" accept=".json,application/json" hidden></div>
+      <div id="taskList" class="list"></div>
+    </div>
+  </section>
+
+  <section id="lesson" class="panel">
+    <div class="card">
+      <h2>授業案のたたき台を作る</h2><p class="sub">学年やねらいを入力すると、授業の流れ・発問・評価・振り返りを組み立てます。実態に合わせて調整してください。</p>
+      <div class="grid">
+        <div><label for="lessonGrade">学年</label><select id="lessonGrade"><option>小学1年</option><option>小学2年</option><option>小学3年</option><option>小学4年</option><option>小学5年</option><option selected>小学6年</option><option>中学校</option><option>その他</option></select></div>
+        <div><label for="lessonSubject">教科・領域</label><select id="lessonSubject"><option>国語</option><option>社会</option><option>算数・数学</option><option>理科</option><option>生活</option><option>音楽</option><option>図画工作・美術</option><option>体育</option><option>外国語</option><option>道徳</option><option>学級活動</option><option>総合的な学習</option><option>その他</option></select></div>
+        <div><label for="lessonMinutes">授業時間</label><select id="lessonMinutes"><option>45分</option><option>50分</option><option>60分</option><option>その他</option></select></div>
+        <div><label for="lessonUnit">単元・題材名</label><input id="lessonUnit" placeholder="例：データの活用"></div>
+      </div>
+      <label for="lessonAim">本時のめあて・ねらい *</label><textarea id="lessonAim" placeholder="子どもにどんなことができるようになってほしいか"></textarea>
+      <label for="lessonPrior">子どもの実態・既習事項</label><textarea id="lessonPrior" placeholder="例：グラフの読み取りは経験しているが、根拠を説明することに課題がある"></textarea>
+      <label for="lessonMaterial">教材・使いたい活動</label><textarea id="lessonMaterial" placeholder="例：具体物、写真、ペア交流、ワークシート"></textarea>
+      <label for="lessonAssessment">評価したい姿</label><input id="lessonAssessment" placeholder="例：資料を根拠に、自分の考えを説明している">
+      <div class="btnrow"><button class="btn teal" id="makeLesson">授業案を作成</button><button class="btn secondary" id="copyLesson">コピー</button><button class="btn secondary" id="downloadLesson">テキスト保存</button></div>
+    </div>
+    <div class="card"><h3>授業案のたたき台</h3><div id="lessonOutput" class="output">入力して「授業案を作成」を押してください。</div></div>
+  </section>
+
+  <section id="writing" class="panel">
+    <div class="card">
+      <h2>保護者向け文章・校務文書を作る</h2><p class="sub">学級通信、連絡メール、行事案内、所見の下書きなど、目的に合わせた文章の土台を作ります。</p>
+      <div class="grid">
+        <div><label for="writeType">文章の種類</label><select id="writeType"><option value="newsletter">学級通信</option><option value="email">保護者・校外向けメール</option><option value="event">行事のお知らせ</option><option value="thanks">お礼の文章</option><option value="correction">訂正・お詫び</option><option value="report">児童の成長を伝える文章</option><option value="meeting">会議・打ち合わせ記録</option></select></div>
+        <div><label for="writeTone">文体</label><select id="writeTone"><option value="warm">温かく丁寧</option><option value="formal">かしこまった丁寧さ</option><option value="short">簡潔</option></select></div>
+        <div><label for="writeAudience">宛先・読者</label><input id="writeAudience" placeholder="例：保護者の皆様、旅行会社ご担当者様"></div>
+        <div><label for="writeTopic">テーマ・件名 *</label><input id="writeTopic" placeholder="例：修学旅行の自由行動について"></div>
+      </div>
+      <label for="writeFacts">伝えたい事実・必ず入れたい内容 *</label><textarea id="writeFacts" placeholder="日時、目的、依頼事項、子どもの姿など。箇条書きでもOK"></textarea>
+      <label for="writeAction">相手にしてほしいこと・締めくくり</label><input id="writeAction" placeholder="例：ご確認をお願いいたします／今後ともよろしくお願いいたします">
+      <label for="writeLength">長さ</label><select id="writeLength"><option value="short">短め</option><option value="normal" selected>標準</option><option value="long">詳しめ</option></select>
+      <div class="btnrow"><button class="btn teal" id="makeWriting">文章の下書きを作成</button><button class="btn secondary" id="copyWriting">コピー</button><button class="btn secondary" id="downloadWriting">テキスト保存</button></div>
+    </div>
+    <div class="card"><h3>文章の下書き</h3><div id="writingOutput" class="output">入力して「文章の下書きを作成」を押してください。</div><p class="small">※自動作成された下書きは必ず事実確認し、学校の文書様式・校内ルールに合わせて修正してください。児童の個人情報を入力しないでください。</p></div>
+  </section>
+
+  <div class="card">
+    <h3>データについて</h3>
+    <p class="small">タスクや入力内容はこのブラウザの保存領域に保存します。Safariの履歴・Webサイトデータを消去すると消えることがあります。定期的に「全データをバックアップ」を使ってください。別の端末・ブラウザには自動同期されません。</p>
+  </div>
+</main>
+<footer>先生の仕事効率化ハブ｜授業と学級経営を支える補助ツール</footer>
 <script>
-let tasks = [];
-try { tasks = JSON.parse(localStorage.getItem('teacherTasksV1') || '[]'); } catch(e) { tasks=[]; }
-function save(){ localStorage.setItem('teacherTasksV1', JSON.stringify(tasks)); renderTasks(); }
-function addTask(){
- const name=document.getElementById('taskName').value.trim();
- if(!name){alert('やることを入力してください。');return;}
- tasks.push({id:Date.now()+Math.random(),name,due:document.getElementById('taskDue').value,priority:document.getElementById('taskPriority').value,mins:Math.max(0,Number(document.getElementById('taskMins').value)||0),done:false});
- document.getElementById('taskName').value='';save();
-}
+const $=id=>document.getElementById(id);
+const KEY='teacherHubPlusV1';
+let state={tasks:[]};
+try{const saved=localStorage.getItem(KEY);if(saved)state={...state,...JSON.parse(saved)}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('保存できませんでした。ブラウザの設定を確認してください。')}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function today(){return new Date().toISOString().slice(0,10)}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===b.dataset.tab))}));
 function renderTasks(){
- const list=document.getElementById('taskList');list.innerHTML='';
- const order={'高':0,'中':1,'低':2};
- tasks.sort((a,b)=>(a.done-b.done)||(order[a.priority]-order[b.priority])||((a.due||'9999').localeCompare(b.due||'9999')));
- tasks.forEach(t=>{
-  const el=document.createElement('div');el.className='task'+(t.done?' done':'');
-  const cb=document.createElement('input');cb.type='checkbox';cb.checked=t.done;cb.setAttribute('aria-label','完了');cb.onchange=()=>{t.done=cb.checked;save();};
-  const txt=document.createElement('div');txt.className='tasktext';txt.textContent=t.name;
-  const sm=document.createElement('small');sm.textContent=`優先度：${t.priority}｜${t.mins}分${t.due?'｜期限：'+t.due:''}`;txt.appendChild(sm);
-  const del=document.createElement('button');del.className='secondary';del.textContent='削除';del.onclick=()=>{tasks=tasks.filter(x=>x.id!==t.id);save();};
-  el.append(cb,txt,del);list.appendChild(el);
- });
- document.getElementById('remaining').textContent=tasks.filter(t=>!t.done).length;
- document.getElementById('completed').textContent=tasks.filter(t=>t.done).length;
- document.getElementById('totalMins').textContent=tasks.filter(t=>!t.done).reduce((s,t)=>s+t.mins,0)+'分';
+ const filter=$('taskFilter').value;let tasks=state.tasks.filter(t=>filter==='all'||(filter==='open'&&!t.done)||(filter==='done'&&t.done));
+ tasks.sort((a,b)=>(a.done-b.done)||({'高':0,'中':1,'低':2}[a.priority]-{'高':0,'中':1,'低':2}[b.priority])||(a.due||'9999').localeCompare(b.due||'9999'));
+ const total=state.tasks.length,done=state.tasks.filter(t=>t.done).length,mins=state.tasks.filter(t=>!t.done).reduce((s,t)=>s+(+t.minutes||0),0);
+ $('taskSummary').textContent=`全${total}件・完了${done}件・未完了の見積もり合計 ${mins}分`;
+ $('taskList').innerHTML=tasks.length?tasks.map(t=>`<div class="task ${t.done?'done':''}"><input type="checkbox" aria-label="完了" data-check="${t.id}" ${t.done?'checked':''}><div><div class="tasktitle">${esc(t.title)}</div><div class="meta"><span class="pill ${t.priority==='高'?'high':''}">${esc(t.priority)}優先</span><span class="pill">${esc(t.category)}</span>${t.due?`<span class="pill ${!t.done&&t.due<today()?'overdue':''}">期限 ${esc(t.due)}</span>`:''}<span class="pill">${esc(t.minutes)}分</span>${t.note?`<div>${esc(t.note)}</div>`:''}</div></div><button class="btn danger" style="padding:7px 10px;min-height:36px" data-delete="${t.id}">削除</button></div>`).join(''):'<div class="empty">表示するタスクはありません。上のフォームから追加できます。</div>';
+ document.querySelectorAll('[data-check]').forEach(el=>el.addEventListener('change',()=>{let t=state.tasks.find(t=>t.id===el.dataset.check);if(t)t.done=el.checked;save();renderTasks()}));
+ document.querySelectorAll('[data-delete]').forEach(el=>el.addEventListener('click',()=>{state.tasks=state.tasks.filter(t=>t.id!==el.dataset.delete);save();renderTasks()}));
 }
-function clearDone(){tasks=tasks.filter(t=>!t.done);save();}
-function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function makeLesson(){
- const subject=document.getElementById('subject').value.trim()||'（教科・単元を記入）';
- const time=document.getElementById('lessonTime').value, type=document.getElementById('lessonType').value;
- const goal=document.getElementById('lessonGoal').value.trim()||'本時の目標を具体化する';
- const concern=document.getElementById('lessonConcern').value.trim()||'想定されるつまずきを確認する';
- const out=`【単元】${subject}\n【本時の目標】${goal}\n【重視する学び】${type}\n\n【授業展開のたたき台（${time}）】\n1. 導入（5分程度）\n前時の学びや身近な事例を提示し、「今日は何を考えるのか」を共有する。\n\n2. 課題提示（5分程度）\n目標につながる問いを提示する。子どもが自分の言葉で課題を言い換えられるか確かめる。\n\n3. 個人思考（8〜10分）\nまず一人で考え、図・短文・資料への印など、考えを見える形にする。\n\n4. 交流・比較（10〜15分）\n考えの共通点と違いを比べる。「どこを根拠にそう考えた？」と問い、理由を具体化する。\n\n5. 全体で整理（5〜8分）\n複数の考えをつなぎ、本時の目標に沿って学びを整理する。\n\n6. 振り返り（3〜5分）\n「分かったこと」「考えが変わったこと」「次に確かめたいこと」から一つ選んで書く。\n\n【予想されるつまずき】${concern}\n【支援の手立て】見本や選択肢を示す／考える観点を一つに絞る／ペアで言葉にしてから書く。\n【評価の見取り】目標に関わる発言・ノート・成果物を確認し、根拠を伴う説明ができているか見る。\n\n※時間配分・活動・評価は教材と学級の実態に合わせて調整する。`;
- document.getElementById('lessonResult').textContent=out;
-}
-function makeDraft(){
- const type=document.getElementById('docType').value,facts=document.getElementById('docFacts').value.trim();
- const tone=document.getElementById('docTone').value,len=document.getElementById('docLength').value;
- let structure='';
- if(type.includes('学級通信')) structure='【構成案】①出来事・事実 ②子どもたちの具体的な姿 ③そこから見える成長や学び ④家庭への共有・今後への期待';
- else if(type.includes('メール')) structure='【構成案】①件名 ②宛名・挨拶 ③用件を先に伝える ④必要な背景・依頼事項 ⑤期限や添付の確認 ⑥結び';
- else if(type.includes('行事')) structure='【構成案】①行事の目的 ②日時・場所 ③持ち物・服装 ④家庭にお願いしたいこと ⑤問い合わせ先（校内ルールに沿って記載）';
- else if(type.includes('所見')) structure='【構成案】①具体的な行動・事実 ②そこに表れたよさ・成長 ③今後期待する姿。評価語だけで終わらず、観察した事実を中心にする。';
- else structure='【構成案】①目的 ②重要事項 ③決定・未決定 ④担当と期限 ⑤次の確認事項';
- document.getElementById('draftResult').textContent=`【文章の種類】${type}\n【文体】${tone}／【長さ】${len}\n【伝えたい要点】\n${facts||'（ここに事実・要点を入力）'}\n\n${structure}\n\n【仕上げの確認】\n□ 読み手が知りたいことが先に書かれている\n□ 事実と推測を分けている\n□ 日時・数字・依頼内容を再確認した\n□ 個人情報や校外秘情報が含まれていない\n\n※これは文章を整えるための構成案です。入力内容に基づく完成文の生成ではありません。`;
-}
-function makeMinutes(){
- const topic=document.getElementById('meetingTopic').value.trim()||'（議題）';
- const dec=document.getElementById('meetingDecision').value.trim()||'・（決定事項）';
- const act=document.getElementById('meetingAction').value.trim()||'・担当：＿＿　行動：＿＿　期限：＿＿';
- document.getElementById('minutesResult').textContent=`【議題】${topic}\n\n【決まったこと】\n${dec}\n\n【次にすること】\n${act}\n\n【次回確認すること】\n・未決定事項：＿＿\n・確認先／期限：＿＿`;
-}
-function makeHandover(){
- document.getElementById('handoverResult').textContent=`【明日、最初にやること】\n${document.getElementById('tomorrow').value.trim()||'（未入力）'}\n\n【返事待ち・確認待ち】\n${document.getElementById('waiting').value.trim()||'なし'}\n\n【忘れたくないメモ】\n${document.getElementById('memo').value.trim()||'なし'}\n\n【再始動の一手】\n朝、最初の5分で上の「最初にやること」に着手する。`;
-}
-async function copyResult(id){
- const text=document.getElementById(id).textContent;
- try{await navigator.clipboard.writeText(text);alert('コピーしました。');}
- catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();alert('コピーしました。');}
-}
-function exportTasks(){
- const rows=[['仕事','期限','優先度','見積もり分','完了'],...tasks.map(t=>[t.name,t.due,t.priority,t.mins,t.done?'はい':'いいえ'])];
- const csv='\uFEFF'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');
- downloadBlob(csv,'教員タスク一覧.csv','text/csv;charset=utf-8;');
-}
-function downloadData(){
- const data={exportedAt:new Date().toISOString(),tasks,notes:{tomorrow:document.getElementById('tomorrow').value,waiting:document.getElementById('waiting').value,memo:document.getElementById('memo').value}};
- downloadBlob(JSON.stringify(data,null,2),'教員効率化メモ.json','application/json');
-}
-function downloadBlob(content,name,type){const blob=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);}
-function resetAll(){if(!confirm('このブラウザに保存したタスクと入力内容を消去します。よろしいですか？'))return;tasks=[];localStorage.removeItem('teacherTasksV1');['tomorrow','waiting','memo','subject','lessonGoal','lessonConcern','docFacts','meetingTopic','meetingDecision','meetingAction'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});['lessonResult','draftResult','minutesResult','handoverResult'].forEach(id=>document.getElementById(id).textContent='');save();}
+$('addTask').onclick=()=>{const title=$('taskTitle').value.trim();if(!title){alert('「やること」を入力してください。');return}state.tasks.push({id:Date.now().toString()+Math.random().toString(16).slice(2),title,due:$('taskDue').value,priority:$('taskPriority').value,minutes:$('taskMinutes').value||0,category:$('taskCategory').value,note:$('taskNote').value.trim(),done:false});save();$('taskTitle').value='';$('taskNote').value='';renderTasks()};
+$('taskFilter').onchange=renderTasks;
+$('clearDone').onclick=()=>{if(confirm('完了済みタスクを削除しますか？')){state.tasks=state.tasks.filter(t=>!t.done);save();renderTasks()}};
+function csvCell(s){return '"'+String(s??'').replace(/"/g,'""')+'"'}
+$('exportTasks').onclick=()=>{const rows=[['やること','期限','優先度','分数','分類','メモ','完了'],...state.tasks.map(t=>[t.title,t.due,t.priority,t.minutes,t.category,t.note,t.done?'はい':'いいえ'])];downloadBlob('\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),'teacher_tasks.csv','text/csv;charset=utf-8')};
+$('backupData').onclick=()=>downloadBlob(JSON.stringify({version:1,exportedAt:new Date().toISOString(),state},null,2),'teacher_hub_backup.json','application/json');
+$('importDataBtn').onclick=()=>$('importData').click();
+$('importData').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d.state||!Array.isArray(d.state.tasks))throw new Error();if(confirm('現在のタスクをバックアップの内容に置き換えますか？')){state=d.state;save();renderTasks();alert('読み込みました。')}}catch(err){alert('バックアップファイルを読み込めませんでした。')}e.target.value=''};
+function downloadBlob(text,name,type){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function val(id){return $(id).value.trim()}
+$('makeLesson').onclick=()=>{
+ const aim=val('lessonAim');if(!aim){alert('本時のめあて・ねらいを入力してください。');return}
+ const grade=val('lessonGrade'),subject=val('lessonSubject'),mins=val('lessonMinutes'),unit=val('lessonUnit')||'（単元名未入力）',prior=val('lessonPrior')||'既習事項と子どもの実態を確認し、導入の問いを調整する。',material=val('lessonMaterial')||'教科書・ノート・必要に応じた図や具体物を用いる。',assess=val('lessonAssessment')||'めあてに向けた考え方や説明の様子を見取る。';
+ const n=parseInt(mins)||45, a=Math.round(n*.15), b=Math.round(n*.2), c=Math.round(n*.4), d=n-a-b-c;
+ $('lessonOutput').textContent=`【授業案のたたき台】\n学年：${grade}\n教科・領域：${subject}\n単元・題材：${unit}\n授業時間：${mins}\n\n■ 本時のめあて\n${aim}\n\n■ 子どもの実態・既習事項\n${prior}\n\n■ 授業の流れ（時間は目安）\n1. 導入・課題づくり（約${a}分）\n・既習事項や身近な場面を提示し、「今日は何を考えるのか」を引き出す。\n・発問例：「これまでに学んだことと、今日の課題はどこがつながっているかな？」\n\n2. めあての確認（約${b}分）\n・めあてを共有し、学習の見通しをもたせる。\n・発問例：「めあてを達成したと言えるのは、どんな姿だろう？」\n\n3. 自力思考・活動（約${c}分）\n・活動：${material}\n・一人で考える時間を確保し、図・言葉・式・資料など、考えを表す方法を選べるようにする。\n・支援：考え始める手掛かりや例を示し、必要に応じて段階的なヒントを用意する。\n\n4. 交流・考えの整理（約${d}分）\n・ペアや全体で考えを伝え合い、共通点・違い・根拠を整理する。\n・発問例：「その考えの根拠は何かな？」「友達の考えで取り入れたいことはある？」\n\n5. まとめ・振り返り（時間配分を調整）\n・まとめ：めあてに対する答えを、子どもの言葉で短く整理する。\n・振り返り例：「今日分かったこと」「考えが変わったこと」「次に確かめたいこと」から1つ選んで書く。\n\n■ 評価の視点\n${assess}\n・見取り方：発言、ノート、ワークシート、活動中の様子などから、めあてに沿って確認する。\n\n■ 授業前に確認すること\n□ めあてとまとめが対応しているか\n□ 子どもが考える時間が十分にあるか\n□ つまずきへの支援と発展課題があるか\n□ 評価する姿が具体的か\n\n※これは汎用のたたき台です。学習指導要領、教科書、児童の実態、学校の指導案様式に合わせて修正してください。`;
+};
+$('copyLesson').onclick=()=>copyOutput('lessonOutput');$('downloadLesson').onclick=()=>downloadOutput('lessonOutput','授業案たたき台.txt');
+function copyOutput(id){const s=$(id).textContent;if(!s||s.startsWith('入力して')){alert('先に作成してください。');return}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(()=>alert('コピーしました。')).catch(()=>fallbackCopy(s));else fallbackCopy(s)}
+function fallbackCopy(s){const t=document.createElement('textarea');t.value=s;document.body.appendChild(t);t.select();try{document.execCommand('copy');alert('コピーしました。')}catch(e){alert('コピーできませんでした。文章を長押しして選択してください。')}t.remove()}
+function downloadOutput(id,name){const s=$(id).textContent;if(!s||s.startsWith('入力して')){alert('先に作成してください。');return}downloadBlob(s,name,'text/plain;charset=utf-8')}
+const openers={warm:'いつも学校の教育活動にご理解とご協力をいただき、ありがとうございます。',formal:'平素より本校の教育活動にご理解とご協力を賜り、誠にありがとうございます。',short:'いつもご理解とご協力をありがとうございます。'};
+$('makeWriting').onclick=()=>{
+ const type=val('writeType'),tone=val('writeTone'),aud=val('writeAudience')||'皆様',topic=val('writeTopic'),facts=val('writeFacts'),action=val('writeAction'),length=val('writeLength');
+ if(!topic||!facts){alert('テーマ・件名と、伝えたい内容を入力してください。');return}
+ const hello=openers[tone];let text='';
+ if(type==='newsletter'){
+ text=`【学級通信の下書き】\n${topic}\n\n${hello}\n\n${facts}\n\n${action||'今後も、子どもたち一人ひとりの成長を大切にしながら、学級づくりを進めてまいります。引き続きよろしくお願いいたします。'}`;
+ }else if(type==='email'){
+ text=`件名：${topic}\n\n${aud}\n\n${tone==='short'?'お世話になっております。':hello}\n\n${facts}\n\n${action||'お忙しいところ恐れ入りますが、ご確認のほどよろしくお願いいたします。'}\n\n${tone==='formal'?'何卒よろしくお願い申し上げます。':'どうぞよろしくお願いいたします。'}`;
+ }else if(type==='event'){
+ text=`【${topic}のお知らせ】\n\n${hello}\n\nこのたび、次のとおり予定しております。\n\n${facts}\n\n${action||'内容をご確認いただき、ご不明な点がありましたら学校までお問い合わせください。'}\n\nご理解とご協力をよろしくお願いいたします。`;
+ }else if(type==='thanks'){
+ text=`${aud}\n\nこのたびは、${topic}について、誠にありがとうございました。\n\n${facts}\n\n${action||'今回いただいたご協力を、今後の教育活動に生かしてまいります。'}\n\n今後ともよろしくお願いいたします。`;
+ }else if(type==='correction'){
+ text=`【${topic}についてのお詫びと訂正】\n\n${aud}\n\n${tone==='formal'?'平素より本校の教育活動にご理解とご協力を賜り、ありがとうございます。':hello}\n\nこのたびお知らせした内容について、次のとおり訂正いたします。\n\n${facts}\n\nご迷惑をおかけしましたことをお詫び申し上げます。${action?'\\n\\n'+action:''}\n\n今後は確認を徹底してまいります。`;
+ }else if(type==='report'){
+ text=`【成長を伝える文章の下書き】\n\n${facts}\n\n${length==='short'?'これからの成長も楽しみにしています。':`このよさを今後の学習や生活にも生かし、自信をもって取り組んでいくことを期待しています。`}\n\n※具体的な行動・事実に基づいているか、本人や保護者に伝わる表現かを確認してください。`;
+ }else{
+ text=`【会議・打ち合わせ記録】\n議題：${topic}\n参加者・宛先：${aud||'（必要に応じて記入）'}\n\n■ 共有事項\n${facts}\n\n■ 決定事項\n（決まったことを記入）\n\n■ 次の対応・担当・期限\n${action||'（担当者・期限を記入）'}\n\n■ 次回確認すること\n（必要に応じて記入）`;
+ }
+ if(length==='short'&&['newsletter','event','thanks'].includes(type))text=text.replace(/\\n\\n/g,'\n\n').split('\n\n').filter((p,i)=>i<4||p.length<120).join('\n\n');
+ if(length==='long'&&['newsletter','event'].includes(type))text+='\n\n【補足するとよい内容】\n・目的や背景\n・当日の流れや具体的な予定\n・家庭で協力していただきたいこと\n・問い合わせ先や締め切り';
+ $('writingOutput').textContent=text;
+};
+$('copyWriting').onclick=()=>copyOutput('writingOutput');$('downloadWriting').onclick=()=>downloadOutput('writingOutput','文章の下書き.txt');
 renderTasks();
 </script>
-</body>
-</html>
+</body></html>
